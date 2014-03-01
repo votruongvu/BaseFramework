@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script type="text/javascript">
+            var CLIENT_ID = '558520737729-a6hkkid48gc82va4cqrvdjsibpvg515j.apps.googleusercontent.com';
+            var SCOPES = [
+                'https://www.googleapis.com/auth/drive.file',
+                'https://www.googleapis.com/auth/userinfo.email',
+                'https://www.googleapis.com/auth/userinfo.profile',
+                // Add other scopes needed by your application.
+            ];
+
+            /**
+             * Called when the client library is loaded.
+             */
+            function handleClientLoad() {
+                console.log("In handleClientLoad()");
+                checkAuth();
+            }
+
+            /**
+             * Check if the current user has authorized the application.
+             */
+            function checkAuth() {
+                gapi.auth.authorize(
+                        {'client_id': CLIENT_ID, 'scope': SCOPES.join(' '), 'immediate': true},
+                        handleAuthResult);
+            }
+
+            /**
+             * Called when authorization server replies.
+             *
+             * @param {Object} authResult Authorization result.
+             */
+            function handleAuthResult(authResult) {
+                var me = this;
+                if (authResult) {
+                    console.log("Access token has been successfully retrieved, requests can be sent to the API");
+                    me.loadClient(function(){
+                        console.log(gapi.client);
+                        me.printFile("0Aq4nsMqblBA2dHdLNVMwZHhvVkt5ZmF3LUZfQUdwSVE");
+                    });
+                    // Access token has been successfully retrieved, requests can be sent to the API
+                } else {
+                    console.log("No access token could be retrieved, force the authorization flow");
+                    // No access token could be retrieved, force the authorization flow.
+                    gapi.auth.authorize(
+                            {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': false},
+                            handleAuthResult);
+                }
+            }
+            /**
+             * Load the Drive API client.
+             * @param {Function} callback Function to call when the client is loaded.
+             */
+            function loadClient(callback) {
+                gapi.client.load('drive', 'v2', callback);
+            }
+            /**
+             * Print a file's metadata.
+             *
+             * @param {String} fileId ID of the file to print metadata for.
+             */
+            function printFile(fileId) {
+                var request = gapi.client.drive.files.get({
+                    'fileId': fileId
+                });
+                request.execute(function(resp) {
+                    if (!resp.error) {
+                        console.log('Title: ' + resp.title);
+                        console.log('Description: ' + resp.description);
+                        console.log('MIME type: ' + resp.mimeType);
+                    } else if (resp.error.code == 401) {
+                        // Access token might have expired.
+                        checkAuth();
+                    } else {
+                        console.log('An error occured: ' + resp.error.message);
+                    }
+                });
+            }
+        </script>
+        <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h3>
+                        Personal Financial Management
+                    </h3>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#aboutMe">About Me</a>
+                        </li>
+                        <li>
+                            <a href="#signIn">Sign In</a>
+                        </li>
+                    </ul>
+                    <div id="main-container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script data-main="js/main" src="js/vendor/requiresjs/require.js"></script>
+</html>

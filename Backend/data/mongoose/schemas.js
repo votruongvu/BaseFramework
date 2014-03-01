@@ -19,9 +19,9 @@ instance.trash(function(err, doc) {
 });*/
 
 var UserSchema = new mongoose.Schema({
-    userName: String,
-    password: String,
-    userDisplayName: String,
+    userName: {type : String, required : true, unique : true},
+    password: {type : String, required : true},
+    userDisplayName: {type : String, required : true},
     userDescription: String
 });
 
@@ -32,9 +32,9 @@ mongoose.model("User", UserSchema);
 
 
 var GroupSchema = new mongoose.Schema({
-    fieldName: String,
-    fieldDisplayName: String,
-    fieldDescription: String,
+    groupName: {type : String, required : true,  unique : true},
+    groupDisplayName: {type : String, required : true},
+    groupDescription: String,
     users : [{type : mongoose.Schema.Types.ObjectId , ref : "User" }]
 });
 
@@ -45,8 +45,8 @@ mongoose.model("Group", GroupSchema);
 
 
 var RoleSchema = new mongoose.Schema({
-    roleName: String,
-    roleDisplayName: String,
+    roleName: {type : String, required : true},
+    roleDisplayName: {type : String, required : true},
     roleDescription: String,
     users : [{type : mongoose.Schema.Types.ObjectId , ref : "User" }],
     groups : [{type : mongoose.Schema.Types.ObjectId, ref : "Group"}]

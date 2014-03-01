@@ -1,0 +1,66 @@
+<div class="col-md-12 column">
+    <div class="vertical-padding-10">
+        <button type="button" class="btn btn-primary" data-bind="click : addNewExpense">
+            <span class="glyphicon glyphicon-plus"></span>
+            Add Expense
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Name</td>
+                <td>Value</td>
+                <td>Date</td>
+                <td class="hidden-xs hidden-sm">Description</td>
+                <td class="hidden-xs hidden-sm">Tags</td>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: expenses">
+            <td data-bind="text: name"></td>
+            <td data-bind="text: value"></td>
+            <td data-bind="text:date"></td>
+            <td class="hidden-xs hidden-sm" data-bind="text: description"></td>
+            <td class="hidden-xs hidden-sm" data-bind="text: tags"></td>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add New Expense</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group vertical-padding-10">
+                        <span class="input-group-addon">Name</span>
+                        <input type="text" class="form-control input-fields" placeholder="Name" data-bind="value : expenseName">
+                    </div>
+                    <div class="input-group vertical-padding-10">
+                        <span class="input-group-addon">Value</span>
+                        <input type="text" class="form-control input-fields bfh-number" placeholder="Value" data-bind="value : expenseValue">
+                    </div>
+                    <div class="input-group vertical-padding-10">
+                        <span class="input-group-addon">Date</span>
+                        <input type="text" class="ui-datepicker-input form-control input-fields input-append" data-date-format="dd/mm/yyyy" placeholder="Date" data-bind="datepicker : expenseDate">
+                    </div>
+                    <div class="input-group vertical-padding-10">
+                        <span class="input-group-addon">Description</span>
+                        <input type="text" class="form-control input-fields "  placeholder="Description" data-bind="value : expenseDescription">
+                    </div>
+                    <div class="input-group vertical-padding-10">
+                        <span class="input-group-addon">Tags</span>
+                        <input type="text" class="form-control input-fields" placeholder="Tags" data-bind="value : expenseTags">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bind="click: doAfterCloseNewExpense">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

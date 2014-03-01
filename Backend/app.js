@@ -4,10 +4,11 @@ GLOBAL.app = express();
 GLOBAL.authenticate = require('authenticate')
 var db = require('./data/mongoose/initDB');
 var schemas = require('./data/mongoose/schemas');
+//require('./data/initData');
 var routes = require('./routes/initRoute');
 
 app.use(express.logger());
-app.use(express.static(__dirname + '/public'));
+app.use('/static', express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 app.use(express.json({strict: true}));
 app.use(authenticate.middleware({

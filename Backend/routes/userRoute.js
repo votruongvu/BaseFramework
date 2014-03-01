@@ -22,6 +22,7 @@ qx.Class.define("UserRoute", {
             }
         },
         create : function(reg, res){
+
            var newUser = new this.userModel({
                /* fieldName : "EmployeeId",
                 fieldDisplayName : "Employee ID",
