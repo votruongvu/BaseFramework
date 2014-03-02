@@ -3,11 +3,11 @@
  */
 var mongoose = require('mongoose');
 
-var dbURI = 'mongodb://localhost:27017/mydb';
+var dbURI = 'mongodb://ds027749.mongolab.com:27749/personalfinance';
 
 var dbOptions = {
-    'user' : 'db_username',
-    'pass' : 'db_password'
+    'user' : 'votruongvu',
+    'pass' : 'Lynadepxinh2411'
 };
 
 //mongoose.connect(dbURI,dbOptions);
