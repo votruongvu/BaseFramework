@@ -4,25 +4,31 @@
             <span class="glyphicon glyphicon-plus"></span>
             Add Expense
         </button>
+        <button type="button" class="btn btn-primary" data-bind="click : updateExpenseList">
+            <span class="glyphicon glyphicon-refresh"></span>
+            Refresh
+        </button>
     </div>
 
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-hover table-responsive">
             <thead>
             <tr>
                 <td>Name</td>
                 <td>Value</td>
                 <td>Date</td>
                 <td class="hidden-xs hidden-sm">Description</td>
-                <td class="hidden-xs hidden-sm">Tags</td>
+                <td class="hidden-xs hidden-sm">Type</td>
             </tr>
             </thead>
             <tbody data-bind="foreach: expenses">
-            <td data-bind="text: name"></td>
-            <td data-bind="text: value"></td>
-            <td data-bind="text:date"></td>
-            <td class="hidden-xs hidden-sm" data-bind="text: description"></td>
-            <td class="hidden-xs hidden-sm" data-bind="text: tags"></td>
+                <tr data-bind="click : $parent.editExpense">
+                <td data-bind="text: expenseName"></td>
+                <td data-bind="text: expenseValue"></td>
+                <td data-bind="text: expenseDate"></td>
+                <td class="hidden-xs hidden-sm" data-bind="text: expenseDescription"></td>
+                <td class="hidden-xs hidden-sm" data-bind="text: expenseType"></td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -52,11 +58,15 @@
                         <input type="text" class="form-control input-fields "  placeholder="Description" data-bind="value : expenseDescription">
                     </div>
                     <div class="input-group vertical-padding-10">
-                        <span class="input-group-addon">Tags</span>
-                        <input type="text" class="form-control input-fields" placeholder="Tags" data-bind="value : expenseTags">
+                        <span class="input-group-addon">Type</span>
+                        <input type="text" class="form-control input-fields" placeholder="Type" data-bind="value : expenseType">
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-primary btn-danger pull-left " data-bind="click : deleteExpense, visible : editable">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        Delete
+                    </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-bind="click: doAfterCloseNewExpense">Save</button>
                 </div>

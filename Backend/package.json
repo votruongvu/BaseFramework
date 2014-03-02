@@ -9,6 +9,7 @@
     "mongodb": "~1.3.23",
     "mongoose": "~3.8.8",
     "mongoose-trashable": "~0.1.1",
-    "authenticate": "~0.1.5"
+    "node-gyp": "~0.12.2",
+    "mongoose-auth": "0.0.12"
   }
 }

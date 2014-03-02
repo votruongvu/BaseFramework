@@ -28,5 +28,24 @@ app.get('/login', function(req, res) {
 });
 //End Register Field Route
 
+//James Vo : Register Field Route
+require('./expenseRoute');
+var expenseRoute = new ExpenseRoute();
 
+app.get('/expenses/:id',function(req,res){
+    expenseRoute.get(req,res);
+});
+app.get('/expenses/startDate/:startDate/endDate/:endDate',function(req,res){
+    expenseRoute.getByUserNameWithPeriodTime(req,res);
+});
+app.post('/expenses',function(req,res){
+    expenseRoute.create(req,res);
+});
+app.put('/expenses/:id',function(req,res){
+    expenseRoute.edit(req,res);
+});
+app.delete('/expenses/:id',function(req,res){
+    expenseRoute.delete(req,res);
+});
+//End Register Field Route
 

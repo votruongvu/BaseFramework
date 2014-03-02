@@ -57,10 +57,29 @@ RoleSchema.plugin(creationInfo);
 RoleSchema.plugin(modifiedOn);
 mongoose.model("Role", RoleSchema);
 
+var ExpenseTypeSchema = new mongoose.Schema({
+    ExpenseTypeName: {type : String, required : true, unique : true},
+    ExpenseTypeDescription: {type : String}
+});
+
+ExpenseTypeSchema.plugin(trashable);
+ExpenseTypeSchema.plugin(creationInfo);
+ExpenseTypeSchema.plugin(modifiedOn);
+mongoose.model("ExpenseType", ExpenseTypeSchema);
 
 
+var ExpenseSchema = new mongoose.Schema({
+    ExpenseName: {type : String, required : true, unique : true},
+    ExpenseValue: {type : Number, required : true},
+    ExpenseDate: {type : Date, required : true},
+    ExpenseDescription : {type : String},
+    ExpenseType : {type : mongoose.Schema.Types.ObjectId, ref : "ExpenseType"}
+});
 
-
+ExpenseSchema.plugin(trashable);
+ExpenseSchema.plugin(creationInfo);
+ExpenseSchema.plugin(modifiedOn);
+mongoose.model("Expense", ExpenseSchema);
 
 
 

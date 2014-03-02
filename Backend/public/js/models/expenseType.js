@@ -12,8 +12,8 @@ define(['undescore', "backbone"], function (_, $) {
         },
         defaults: {
             id: null,
-            name: "",
-            description: ""
+            expenseName: "",
+            expenseDescription: ""
         }
     });
     return ExpenseTypeModel;

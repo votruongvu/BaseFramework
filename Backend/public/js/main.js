@@ -8,7 +8,7 @@ requirejs.config({
         "date.format" : "vendor/date.format",
         "domReady": "vendor/requiresjs/plugins/domReady",
         "underscore": "vendor/underscore-min",
-        "backbone": "vendor/backbone-min",
+        "backbone": "vendor/backbone",
         "knockout": "vendor/knockout-3.0.0",
         "knockback": "vendor/knockback.min"
     },

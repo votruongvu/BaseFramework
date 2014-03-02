@@ -1,20 +1,19 @@
-var qx = require('qooxdoo');
 GLOBAL.express = require('express');
 GLOBAL.app = express();
-GLOBAL.authenticate = require('authenticate')
-var db = require('./data/mongoose/initDB');
-var schemas = require('./data/mongoose/schemas');
-//require('./data/initData');
-var routes = require('./routes/initRoute');
 
 app.use(express.logger());
+app.use(express.compress());
 app.use('/static', express.static(__dirname + '/public'));
-app.use(express.bodyParser());
-app.use(express.json({strict: true}));
-app.use(authenticate.middleware({
-    encrypt_key: "9b73iQHDQA", // Add any key for encrypting data
-    validate_key: "RDyscwMazM" // Add any key for signing data
-}));
+app.use(express.json());
+app.use(express.urlencoded());
+
+
+require('./data/mongoose/initDB');
+require('./data/mongoose/schemas');
+//require('./data/initData');
+require('./routes/initRoute');
+
+
 
 app.listen(3000);
 console.log('Listening on port 3000');

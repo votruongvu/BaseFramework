@@ -50,7 +50,13 @@ define([
                 }
             }
         };
-
+        Backbone.old_sync = Backbone.sync
+        Backbone.sync = function(method, model, options) {
+            /*console.log("I've been passed " + method + " with " + JSON.stringify(model));*/
+            //add token to url
+            ///
+            Backbone.old_sync(method, model, options);
+        };
 
     }
     return {
